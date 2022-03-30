@@ -1,6 +1,8 @@
 import Swiper from 'swiper/swiper-bundle';
 
+
 /**
+ * Gutenberg
  * is jQuery
  * @param obj
  * @returns {*}
@@ -13,6 +15,7 @@ let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 (function ($) {
+
 
     /**
      * jQuery
