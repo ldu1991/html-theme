@@ -1,9 +1,12 @@
 'use strict';
 
 const browserSync   = require('browser-sync').create(),
+    data            = require('gulp-data'),
     gulp            = require('gulp'),
     plugins         = require('gulp-load-plugins')(),
-    sass            = require('gulp-sass')(require('sass'))
+    pug             = require('gulp-pug'),
+    sass            = require('gulp-sass')(require('sass')),
+    fs = require('fs');
 
 plugins.merge = require('merge-stream')
 plugins.browserify = require('browserify')
@@ -20,10 +23,12 @@ gulp.task('pl', function () {
 let src = {
         main: '../',
         scss: './scss',
-        js: './js'
+        js: './js',
+        pug: './pug'
     },
     dist = {
         main: '../',
+        pug: './pug/',
         css: '../assets/css',
         js: '../assets/js'
     }
@@ -41,7 +46,8 @@ gulp.task('scss', require('./gulpfile_css')(gulp, plugins, false, sass));
 gulp.task('scss:release', require('./gulpfile_css')(gulp, plugins, true, sass));
 gulp.task('js', require('./gulpfile_js')(gulp, plugins, false));
 gulp.task('js:release', require('./gulpfile_js')(gulp, plugins, true));
-gulp.task('html', require('./gulpfile_html')(gulp, plugins))
+// gulp.task('html', require('./gulpfile_html')(gulp, plugins))
+gulp.task('pug', require('./gulpfile_pug')(gulp, plugins, pug, data, fs));
 
 gulp.task('browser-sync', function () {
     browserSync.init({
@@ -52,9 +58,9 @@ gulp.task('browser-sync', function () {
     })
 
     gulp.watch([
-        dist.main + '**/*.html',
+        dist.main + '**/*.pug',
         dist.css + '/**/*.css',
-        dist.js + '/**/*.js'
+        dist.js + '/**/*.js',
     ], {cwd: './'})
         .on('change', function (path, stats) {
             browserSync.reload();
@@ -64,8 +70,10 @@ gulp.task('browser-sync', function () {
 gulp.task('watch', function () {
     gulp.watch(src.scss + '/**/*.scss', {cwd: './'}, gulp.series('scss'));
     gulp.watch(src.js + '/**/*.js', {cwd: './'}, gulp.series('js'));
-    gulp.watch(src.main + '/**/*.html', {cwd: './'}, gulp.series('html'));
+    // gulp.watch(src.main + '/**/*.html', {cwd: './'}, gulp.series('html'));
+    gulp.watch(src.pug + '/**/*.pug', {cwd: './'}, gulp.series('pug'));
 });
 
-gulp.task('default', gulp.series('scss', 'js', 'html', gulp.parallel('browser-sync', 'watch')));
-gulp.task('release', gulp.series('clean-css-maps', 'scss:release', 'js:release', 'html'));
+// gulp.task('default', gulp.series('scss', 'js', 'html', gulp.parallel('browser-sync', 'watch')));
+gulp.task('default', gulp.series('scss', 'js', 'pug', gulp.parallel('browser-sync', 'watch')));
+gulp.task('release', gulp.series('clean-css-maps', 'scss:release', 'js:release', 'pug'));
