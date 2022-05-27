@@ -80,22 +80,22 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
 },{"swiper/swiper-bundle":2}],2:[function(require,module,exports){
 /**
- * Swiper 8.1.4
+ * Swiper 7.4.1
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
- * Copyright 2014-2022 Vladimir Kharlampidi
+ * Copyright 2014-2021 Vladimir Kharlampidi
  *
  * Released under the MIT License
  *
- * Released on: April 24, 2022
+ * Released on: December 24, 2021
  */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Swiper = factory());
-})(this, (function () { 'use strict';
+}(this, (function () { 'use strict';
 
     /**
      * SSR Window 4.0.2
@@ -114,15 +114,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return obj !== null && typeof obj === 'object' && 'constructor' in obj && obj.constructor === Object;
     }
 
-    function extend$1(target, src) {
-      if (target === void 0) {
-        target = {};
-      }
-
-      if (src === void 0) {
-        src = {};
-      }
-
+    function extend$1(target = {}, src = {}) {
       Object.keys(src).forEach(key => {
         if (typeof target[key] === 'undefined') target[key] = src[key];else if (isObject$1(src[key]) && isObject$1(target[key]) && Object.keys(src[key]).length > 0) {
           extend$1(target[key], src[key]);
@@ -285,15 +277,15 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /**
-     * Dom7 4.0.4
+     * Dom7 4.0.2
      * Minimalistic JavaScript library for DOM manipulation, with a jQuery-compatible API
      * https://framework7.io/docs/dom7.html
      *
-     * Copyright 2022, Vladimir Kharlampidi
+     * Copyright 2021, Vladimir Kharlampidi
      *
      * Licensed under MIT
      *
-     * Released on: January 11, 2022
+     * Released on: December 13, 2021
      */
     /* eslint-disable no-proto */
 
@@ -313,21 +305,13 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
     class Dom7 extends Array {
       constructor(items) {
-        if (typeof items === 'number') {
-          super(items);
-        } else {
-          super(...(items || []));
-          makeReactive(this);
-        }
+        super(...(items || []));
+        makeReactive(this);
       }
 
     }
 
-    function arrayFlat(arr) {
-      if (arr === void 0) {
-        arr = [];
-      }
-
+    function arrayFlat(arr = []) {
       const res = [];
       arr.forEach(el => {
         if (Array.isArray(el)) {
@@ -414,11 +398,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
     $.fn = Dom7.prototype; // eslint-disable-next-line
 
-    function addClass() {
-      for (var _len = arguments.length, classes = new Array(_len), _key = 0; _key < _len; _key++) {
-        classes[_key] = arguments[_key];
-      }
-
+    function addClass(...classes) {
       const classNames = arrayFlat(classes.map(c => c.split(' ')));
       this.forEach(el => {
         el.classList.add(...classNames);
@@ -426,11 +406,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return this;
     }
 
-    function removeClass() {
-      for (var _len2 = arguments.length, classes = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        classes[_key2] = arguments[_key2];
-      }
-
+    function removeClass(...classes) {
       const classNames = arrayFlat(classes.map(c => c.split(' ')));
       this.forEach(el => {
         el.classList.remove(...classNames);
@@ -438,11 +414,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return this;
     }
 
-    function toggleClass() {
-      for (var _len3 = arguments.length, classes = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        classes[_key3] = arguments[_key3];
-      }
-
+    function toggleClass(...classes) {
       const classNames = arrayFlat(classes.map(c => c.split(' ')));
       this.forEach(el => {
         classNames.forEach(className => {
@@ -451,11 +423,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function hasClass() {
-      for (var _len4 = arguments.length, classes = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        classes[_key4] = arguments[_key4];
-      }
-
+    function hasClass(...classes) {
       const classNames = arrayFlat(classes.map(c => c.split(' ')));
       return arrayFilter(this, el => {
         return classNames.filter(className => el.classList.contains(className)).length > 0;
@@ -510,11 +478,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return this;
     }
 
-    function on() {
-      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        args[_key5] = arguments[_key5];
-      }
-
+    function on(...args) {
       let [eventType, targetSelector, listener, capture] = args;
 
       if (typeof args[1] === 'function') {
@@ -587,11 +551,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return this;
     }
 
-    function off() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
-      }
-
+    function off(...args) {
       let [eventType, targetSelector, listener, capture] = args;
 
       if (typeof args[1] === 'function') {
@@ -637,13 +597,8 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return this;
     }
 
-    function trigger() {
+    function trigger(...args) {
       const window = getWindow();
-
-      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        args[_key9] = arguments[_key9];
-      }
-
       const events = args[0].split(' ');
       const eventData = args[1];
 
@@ -883,12 +838,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return $([this[index]]);
     }
 
-    function append() {
+    function append(...els) {
       let newChild;
       const document = getDocument();
 
-      for (let k = 0; k < arguments.length; k += 1) {
-        newChild = k < 0 || arguments.length <= k ? undefined : arguments[k];
+      for (let k = 0; k < els.length; k += 1) {
+        newChild = els[k];
 
         for (let i = 0; i < this.length; i += 1) {
           if (typeof newChild === 'string') {
@@ -1156,11 +1111,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function nextTick(callback, delay) {
-      if (delay === void 0) {
-        delay = 0;
-      }
-
+    function nextTick(callback, delay = 0) {
       return setTimeout(callback, delay);
     }
 
@@ -1187,11 +1138,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return style;
     }
 
-    function getTranslate(el, axis) {
-      if (axis === void 0) {
-        axis = 'x';
-      }
-
+    function getTranslate(el, axis = 'x') {
       const window = getWindow();
       let matrix;
       let curTransform;
@@ -1243,12 +1190,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return node && (node.nodeType === 1 || node.nodeType === 11);
     }
 
-    function extend() {
-      const to = Object(arguments.length <= 0 ? undefined : arguments[0]);
+    function extend(...args) {
+      const to = Object(args[0]);
       const noExtend = ['__proto__', 'constructor', 'prototype'];
 
-      for (let i = 1; i < arguments.length; i += 1) {
-        const nextSource = i < 0 || arguments.length <= i ? undefined : arguments[i];
+      for (let i = 1; i < args.length; i += 1) {
+        const nextSource = args[i];
 
         if (nextSource !== undefined && nextSource !== null && !isNode(nextSource)) {
           const keysArray = Object.keys(Object(nextSource)).filter(key => noExtend.indexOf(key) < 0);
@@ -1287,12 +1234,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       el.style.setProperty(varName, varValue);
     }
 
-    function animateCSSModeScroll(_ref) {
-      let {
-        swiper,
-        targetPosition,
-        side
-      } = _ref;
+    function animateCSSModeScroll({
+      swiper,
+      targetPosition,
+      side
+    }) {
       const window = getWindow();
       const startPosition = -swiper.translate;
       let startTime = null;
@@ -1385,10 +1331,9 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
     let deviceCached;
 
-    function calcDevice(_temp) {
-      let {
-        userAgent
-      } = _temp === void 0 ? {} : _temp;
+    function calcDevice({
+      userAgent
+    } = {}) {
       const support = getSupport();
       const window = getWindow();
       const platform = window.navigator.platform;
@@ -1430,11 +1375,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return device;
     }
 
-    function getDevice(overrides) {
-      if (overrides === void 0) {
-        overrides = {};
-      }
-
+    function getDevice(overrides = {}) {
       if (!deviceCached) {
         deviceCached = calcDevice(overrides);
       }
@@ -1466,15 +1407,13 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return browser;
     }
 
-    function Resize(_ref) {
-      let {
-        swiper,
-        on,
-        emit
-      } = _ref;
+    function Resize({
+      swiper,
+      on,
+      emit
+    }) {
       const window = getWindow();
       let observer = null;
-      let animationFrame = null;
 
       const resizeHandler = () => {
         if (!swiper || swiper.destroyed || !swiper.initialized) return;
@@ -1485,37 +1424,30 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       const createObserver = () => {
         if (!swiper || swiper.destroyed || !swiper.initialized) return;
         observer = new ResizeObserver(entries => {
-          animationFrame = window.requestAnimationFrame(() => {
-            const {
-              width,
-              height
-            } = swiper;
-            let newWidth = width;
-            let newHeight = height;
-            entries.forEach(_ref2 => {
-              let {
-                contentBoxSize,
-                contentRect,
-                target
-              } = _ref2;
-              if (target && target !== swiper.el) return;
-              newWidth = contentRect ? contentRect.width : (contentBoxSize[0] || contentBoxSize).inlineSize;
-              newHeight = contentRect ? contentRect.height : (contentBoxSize[0] || contentBoxSize).blockSize;
-            });
-
-            if (newWidth !== width || newHeight !== height) {
-              resizeHandler();
-            }
+          const {
+            width,
+            height
+          } = swiper;
+          let newWidth = width;
+          let newHeight = height;
+          entries.forEach(({
+            contentBoxSize,
+            contentRect,
+            target
+          }) => {
+            if (target && target !== swiper.el) return;
+            newWidth = contentRect ? contentRect.width : (contentBoxSize[0] || contentBoxSize).inlineSize;
+            newHeight = contentRect ? contentRect.height : (contentBoxSize[0] || contentBoxSize).blockSize;
           });
+
+          if (newWidth !== width || newHeight !== height) {
+            resizeHandler();
+          }
         });
         observer.observe(swiper.el);
       };
 
       const removeObserver = () => {
-        if (animationFrame) {
-          window.cancelAnimationFrame(animationFrame);
-        }
-
         if (observer && observer.unobserve && swiper.el) {
           observer.unobserve(swiper.el);
           observer = null;
@@ -1543,21 +1475,16 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function Observer(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Observer({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       const observers = [];
       const window = getWindow();
 
-      const attach = function (target, options) {
-        if (options === void 0) {
-          options = {};
-        }
-
+      const attach = (target, options = {}) => {
         const ObserverFunc = window.MutationObserver || window.WebkitMutationObserver;
         const observer = new ObserverFunc(mutations => {
           // The observerUpdate event should only be triggered
@@ -1627,7 +1554,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     var eventsEmitter = {
       on(events, handler, priority) {
         const self = this;
-        if (!self.eventsListeners || self.destroyed) return self;
         if (typeof handler !== 'function') return self;
         const method = priority ? 'unshift' : 'push';
         events.split(' ').forEach(event => {
@@ -1639,18 +1565,13 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       once(events, handler, priority) {
         const self = this;
-        if (!self.eventsListeners || self.destroyed) return self;
         if (typeof handler !== 'function') return self;
 
-        function onceHandler() {
+        function onceHandler(...args) {
           self.off(events, onceHandler);
 
           if (onceHandler.__emitterProxy) {
             delete onceHandler.__emitterProxy;
-          }
-
-          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
           }
 
           handler.apply(self, args);
@@ -1662,7 +1583,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       onAny(handler, priority) {
         const self = this;
-        if (!self.eventsListeners || self.destroyed) return self;
         if (typeof handler !== 'function') return self;
         const method = priority ? 'unshift' : 'push';
 
@@ -1675,7 +1595,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       offAny(handler) {
         const self = this;
-        if (!self.eventsListeners || self.destroyed) return self;
         if (!self.eventsAnyListeners) return self;
         const index = self.eventsAnyListeners.indexOf(handler);
 
@@ -1688,7 +1607,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       off(events, handler) {
         const self = this;
-        if (!self.eventsListeners || self.destroyed) return self;
         if (!self.eventsListeners) return self;
         events.split(' ').forEach(event => {
           if (typeof handler === 'undefined') {
@@ -1704,17 +1622,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         return self;
       },
 
-      emit() {
+      emit(...args) {
         const self = this;
-        if (!self.eventsListeners || self.destroyed) return self;
         if (!self.eventsListeners) return self;
         let events;
         let data;
         let context;
-
-        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-          args[_key2] = arguments[_key2];
-        }
 
         if (typeof args[0] === 'string' || Array.isArray(args[0])) {
           events = args[0];
@@ -2087,17 +2000,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       if (params.watchSlidesProgress) {
         swiper.updateSlidesOffset();
       }
-
-      if (!isVirtual && !params.cssMode && (params.effect === 'slide' || params.effect === 'fade')) {
-        const backFaceHiddenClass = `${params.containerModifierClass}backface-hidden`;
-        const hasClassBackfaceClassAdded = swiper.$el.hasClass(backFaceHiddenClass);
-
-        if (slidesLength <= params.maxBackfaceHiddenSlides) {
-          if (!hasClassBackfaceClassAdded) swiper.$el.addClass(backFaceHiddenClass);
-        } else if (hasClassBackfaceClassAdded) {
-          swiper.$el.removeClass(backFaceHiddenClass);
-        }
-      }
     }
 
     function updateAutoHeight(speed) {
@@ -2159,11 +2061,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       }
     }
 
-    function updateSlidesProgress(translate) {
-      if (translate === void 0) {
-        translate = this && this.translate || 0;
-      }
-
+    function updateSlidesProgress(translate = this && this.translate || 0) {
       const swiper = this;
       const params = swiper.params;
       const {
@@ -2442,11 +2340,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       updateClickedSlide
     };
 
-    function getSwiperTranslate(axis) {
-      if (axis === void 0) {
-        axis = this.isHorizontal() ? 'x' : 'y';
-      }
-
+    function getSwiperTranslate(axis = this.isHorizontal() ? 'x' : 'y') {
       const swiper = this;
       const {
         params,
@@ -2525,23 +2419,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return -this.snapGrid[this.snapGrid.length - 1];
     }
 
-    function translateTo(translate, speed, runCallbacks, translateBounds, internal) {
-      if (translate === void 0) {
-        translate = 0;
-      }
-
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
-      if (translateBounds === void 0) {
-        translateBounds = true;
-      }
-
+    function translateTo(translate = 0, speed = this.params.speed, runCallbacks = true, translateBounds = true, internal) {
       const swiper = this;
       const {
         params,
@@ -2644,13 +2522,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       swiper.emit('setTransition', duration, byController);
     }
 
-    function transitionEmit(_ref) {
-      let {
-        swiper,
-        runCallbacks,
-        direction,
-        step
-      } = _ref;
+    function transitionEmit({
+      swiper,
+      runCallbacks,
+      direction,
+      step
+    }) {
       const {
         activeIndex,
         previousIndex
@@ -2679,11 +2556,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       }
     }
 
-    function transitionStart(runCallbacks, direction) {
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function transitionStart(runCallbacks = true, direction) {
       const swiper = this;
       const {
         params
@@ -2702,11 +2575,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function transitionEnd(runCallbacks, direction) {
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function transitionEnd(runCallbacks = true, direction) {
       const swiper = this;
       const {
         params
@@ -2728,19 +2597,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       transitionEnd
     };
 
-    function slideTo(index, speed, runCallbacks, internal, initial) {
-      if (index === void 0) {
-        index = 0;
-      }
-
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function slideTo(index = 0, speed = this.params.speed, runCallbacks = true, internal, initial) {
       if (typeof index !== 'number' && typeof index !== 'string') {
         throw new Error(`The 'index' argument cannot have type other than 'number' or 'string'. [${typeof index}] given.`);
       }
@@ -2921,19 +2778,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return true;
     }
 
-    function slideToLoop(index, speed, runCallbacks, internal) {
-      if (index === void 0) {
-        index = 0;
-      }
-
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function slideToLoop(index = 0, speed = this.params.speed, runCallbacks = true, internal) {
       const swiper = this;
       let newIndex = index;
 
@@ -2945,15 +2790,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /* eslint no-unused-vars: "off" */
-    function slideNext(speed, runCallbacks, internal) {
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function slideNext(speed = this.params.speed, runCallbacks = true, internal) {
       const swiper = this;
       const {
         animating,
@@ -2984,15 +2821,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /* eslint no-unused-vars: "off" */
-    function slidePrev(speed, runCallbacks, internal) {
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function slidePrev(speed = this.params.speed, runCallbacks = true, internal) {
       const swiper = this;
       const {
         params,
@@ -3049,41 +2878,20 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       }
 
       if (params.rewind && swiper.isBeginning) {
-        const lastIndex = swiper.params.virtual && swiper.params.virtual.enabled && swiper.virtual ? swiper.virtual.slides.length - 1 : swiper.slides.length - 1;
-        return swiper.slideTo(lastIndex, speed, runCallbacks, internal);
+        return swiper.slideTo(swiper.slides.length - 1, speed, runCallbacks, internal);
       }
 
       return swiper.slideTo(prevIndex, speed, runCallbacks, internal);
     }
 
     /* eslint no-unused-vars: "off" */
-    function slideReset(speed, runCallbacks, internal) {
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
+    function slideReset(speed = this.params.speed, runCallbacks = true, internal) {
       const swiper = this;
       return swiper.slideTo(swiper.activeIndex, speed, runCallbacks, internal);
     }
 
     /* eslint no-unused-vars: "off" */
-    function slideToClosest(speed, runCallbacks, internal, threshold) {
-      if (speed === void 0) {
-        speed = this.params.speed;
-      }
-
-      if (runCallbacks === void 0) {
-        runCallbacks = true;
-      }
-
-      if (threshold === void 0) {
-        threshold = 0.5;
-      }
-
+    function slideToClosest(speed = this.params.speed, runCallbacks = true, internal, threshold = 0.5) {
       const swiper = this;
       let index = swiper.activeIndex;
       const skip = Math.min(swiper.params.slidesPerGroupSkip, index);
@@ -3285,6 +3093,8 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       if (swiper.support.touch || !swiper.params.simulateTouch || swiper.params.watchOverflow && swiper.isLocked || swiper.params.cssMode) return;
       const el = swiper.params.touchEventsTarget === 'container' ? swiper.el : swiper.wrapperEl;
       el.style.cursor = 'move';
+      el.style.cursor = moving ? '-webkit-grabbing' : '-webkit-grab';
+      el.style.cursor = moving ? '-moz-grabbin' : '-moz-grab';
       el.style.cursor = moving ? 'grabbing' : 'grab';
     }
 
@@ -3303,11 +3113,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       unsetGrabCursor
     };
 
-    function closestElement(selector, base) {
-      if (base === void 0) {
-        base = this;
-      }
-
+    function closestElement(selector, base = this) {
       function __closestFrom(el) {
         if (!el || el === getDocument() || el === getWindow()) return null;
         if (el.assignedSlot) el = el.assignedSlot;
@@ -3402,14 +3208,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       if (e.type !== 'touchstart') {
         let preventDefault = true;
-
-        if ($targetEl.is(data.focusableElements)) {
-          preventDefault = false;
-
-          if ($targetEl[0].nodeName === 'SELECT') {
-            data.isTouched = false;
-          }
-        }
+        if ($targetEl.is(data.focusableElements)) preventDefault = false;
 
         if (document.activeElement && $(document.activeElement).is(data.focusableElements) && document.activeElement !== $targetEl[0]) {
           document.activeElement.blur();
@@ -3420,10 +3219,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         if ((params.touchStartForcePreventDefault || shouldPreventDefault) && !$targetEl[0].isContentEditable) {
           e.preventDefault();
         }
-      }
-
-      if (swiper.params.freeMode && swiper.params.freeMode.enabled && swiper.freeMode && swiper.animating && !params.cssMode) {
-        swiper.freeMode.onTouchStart();
       }
 
       swiper.emit('touchStart', e);
@@ -3463,9 +3258,8 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       }
 
       if (!swiper.allowTouchMove) {
-        if (!$(e.target).is(data.focusableElements)) {
-          swiper.allowClick = false;
-        }
+        // isMoved = true;
+        swiper.allowClick = false;
 
         if (data.isTouched) {
           Object.assign(touches, {
@@ -3749,17 +3543,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           stopIndex = i;
           groupSize = slidesGrid[slidesGrid.length - 1] - slidesGrid[slidesGrid.length - 2];
         }
-      }
-
-      let rewindFirstIndex = null;
-      let rewindLastIndex = null;
-
-      if (params.rewind) {
-        if (swiper.isBeginning) {
-          rewindLastIndex = swiper.params.virtual && swiper.params.virtual.enabled && swiper.virtual ? swiper.virtual.slides.length - 1 : swiper.slides.length - 1;
-        } else if (swiper.isEnd) {
-          rewindFirstIndex = 0;
-        }
       } // Find current slide size
 
 
@@ -3774,17 +3557,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         }
 
         if (swiper.swipeDirection === 'next') {
-          if (ratio >= params.longSwipesRatio) swiper.slideTo(params.rewind && swiper.isEnd ? rewindFirstIndex : stopIndex + increment);else swiper.slideTo(stopIndex);
+          if (ratio >= params.longSwipesRatio) swiper.slideTo(stopIndex + increment);else swiper.slideTo(stopIndex);
         }
 
         if (swiper.swipeDirection === 'prev') {
-          if (ratio > 1 - params.longSwipesRatio) {
-            swiper.slideTo(stopIndex + increment);
-          } else if (rewindLastIndex !== null && ratio < 0 && Math.abs(ratio) > params.longSwipesRatio) {
-            swiper.slideTo(rewindLastIndex);
-          } else {
-            swiper.slideTo(stopIndex);
-          }
+          if (ratio > 1 - params.longSwipesRatio) swiper.slideTo(stopIndex + increment);else swiper.slideTo(stopIndex);
         }
       } else {
         // Short swipes
@@ -3797,11 +3574,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
         if (!isNavButtonTarget) {
           if (swiper.swipeDirection === 'next') {
-            swiper.slideTo(rewindFirstIndex !== null ? rewindFirstIndex : stopIndex + increment);
+            swiper.slideTo(stopIndex + increment);
           }
 
           if (swiper.swipeDirection === 'prev') {
-            swiper.slideTo(rewindLastIndex !== null ? rewindLastIndex : stopIndex);
+            swiper.slideTo(stopIndex);
           }
         } else if (e.target === swiper.navigation.nextEl) {
           swiper.slideTo(stopIndex + increment);
@@ -3886,7 +3663,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       } // eslint-disable-next-line
 
 
-      if (swiper.translate === 0) swiper.translate = 0;
+      if (swiper.translate === -0) swiper.translate = 0;
       swiper.updateActiveIndex();
       swiper.updateSlidesClasses();
       let newProgress;
@@ -4067,11 +3844,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       swiper.emit('breakpoint', breakpointParams);
     }
 
-    function getBreakpoint(breakpoints, base, containerEl) {
-      if (base === void 0) {
-        base = 'window';
-      }
-
+    function getBreakpoint(breakpoints, base = 'window', containerEl) {
       if (!breakpoints || base === 'container' && !containerEl) return undefined;
       let breakpoint = false;
       const window = getWindow();
@@ -4163,8 +3936,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         'css-mode': params.cssMode
       }, {
         'centered': params.cssMode && params.centeredSlides
-      }, {
-        'watch-progress': params.watchSlidesProgress
       }], params.containerModifierClass);
       classNames.push(...suffixes);
       $el.addClass([...classNames].join(' '));
@@ -4389,7 +4160,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       noSwipingSelector: null,
       // Passive Listeners
       passiveListeners: true,
-      maxBackfaceHiddenSlides: 10,
       // NS
       containerModifierClass: 'swiper-',
       // NEW
@@ -4411,11 +4181,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     };
 
     function moduleExtendParams(params, allModulesParams) {
-      return function extendParams(obj) {
-        if (obj === void 0) {
-          obj = {};
-        }
-
+      return function extendParams(obj = {}) {
         const moduleParamName = Object.keys(obj)[0];
         const moduleParams = obj[moduleParamName];
 
@@ -4470,13 +4236,9 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     const extendedDefaults = {};
 
     class Swiper {
-      constructor() {
+      constructor(...args) {
         let el;
         let params;
-
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
 
         if (args.length === 1 && args[0].constructor && Object.prototype.toString.call(args[0]).slice(8, -1) === 'Object') {
           params = args[0];
@@ -4689,7 +4451,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       getSlideClasses(slideEl) {
         const swiper = this;
-        if (swiper.destroyed) return '';
         return slideEl.className.split(' ').filter(className => {
           return className.indexOf('swiper-slide') === 0 || className.indexOf(swiper.params.slideClass) === 0;
         }).join(' ');
@@ -4710,15 +4471,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         swiper.emit('_slideClasses', updates);
       }
 
-      slidesPerViewDynamic(view, exact) {
-        if (view === void 0) {
-          view = 'current';
-        }
-
-        if (exact === void 0) {
-          exact = false;
-        }
-
+      slidesPerViewDynamic(view = 'current', exact = false) {
         const swiper = this;
         const {
           params,
@@ -4826,11 +4579,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         swiper.emit('update');
       }
 
-      changeDirection(newDirection, needUpdate) {
-        if (needUpdate === void 0) {
-          needUpdate = true;
-        }
-
+      changeDirection(newDirection, needUpdate = true) {
         const swiper = this;
         const currentDirection = swiper.params.direction;
 
@@ -4968,15 +4717,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         return swiper;
       }
 
-      destroy(deleteInstance, cleanStyles) {
-        if (deleteInstance === void 0) {
-          deleteInstance = true;
-        }
-
-        if (cleanStyles === void 0) {
-          cleanStyles = true;
-        }
-
+      destroy(deleteInstance = true, cleanStyles = true) {
         const swiper = this;
         const {
           params,
@@ -5065,13 +4806,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     });
     Swiper.use([Resize, Observer]);
 
-    function Virtual(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Virtual({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         virtual: {
           enabled: false,
@@ -5161,8 +4900,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           if (swiper.lazy && swiper.params.lazy.enabled) {
             swiper.lazy.load();
           }
-
-          emit('virtualUpdate');
         }
 
         if (previousFrom === from && previousTo === to && !force) {
@@ -5171,7 +4908,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           }
 
           swiper.updateProgress();
-          emit('virtualUpdate');
           return;
         }
 
@@ -5193,8 +4929,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
           if (swiper.params.virtual.renderExternalUpdate) {
             onRendered();
-          } else {
-            emit('virtualUpdate');
           }
 
           return;
@@ -5363,13 +5097,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /* eslint-disable consistent-return */
-    function Keyboard(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Keyboard({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       const document = getDocument();
       const window = getWindow();
       swiper.keyboard = {
@@ -5494,13 +5227,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /* eslint-disable consistent-return */
-    function Mousewheel(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Mousewheel({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       const window = getWindow();
       extendParams({
         mousewheel: {
@@ -5937,13 +5669,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return params;
     }
 
-    function Navigation(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Navigation({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       extendParams({
         navigation: {
           nextEl: null,
@@ -6122,22 +5853,17 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function classesToSelector(classes) {
-      if (classes === void 0) {
-        classes = '';
-      }
-
+    function classesToSelector(classes = '') {
       return `.${classes.trim().replace(/([\.:!\/])/g, '\\$1') // eslint-disable-line
   .replace(/ /g, '.')}`;
     }
 
-    function Pagination(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Pagination({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       const pfx = 'swiper-pagination';
       extendParams({
         pagination: {
@@ -6421,7 +6147,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         }
 
         $el.addClass(params.modifierClass + params.type);
-        $el.addClass(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+        $el.addClass(params.modifierClass + swiper.params.direction);
 
         if (params.type === 'bullets' && params.dynamicBullets) {
           $el.addClass(`${params.modifierClass}${params.type}-dynamic`);
@@ -6461,7 +6187,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         const $el = swiper.pagination.$el;
         $el.removeClass(params.hiddenClass);
         $el.removeClass(params.modifierClass + params.type);
-        $el.removeClass(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+        $el.removeClass(params.modifierClass + swiper.params.direction);
         if (swiper.pagination.bullets && swiper.pagination.bullets.removeClass) swiper.pagination.bullets.removeClass(params.bulletActiveClass);
 
         if (params.clickable) {
@@ -6540,13 +6266,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function Scrollbar(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Scrollbar({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       const document = getDocument();
       let isTouched = false;
       let timeout = null;
@@ -6899,12 +6624,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function Parallax(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function Parallax({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         parallax: {
           enabled: false
@@ -6983,11 +6707,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         });
       };
 
-      const setTransition = function (duration) {
-        if (duration === void 0) {
-          duration = swiper.params.speed;
-        }
-
+      const setTransition = (duration = swiper.params.speed) => {
         const {
           $el
         } = swiper;
@@ -7018,13 +6738,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function Zoom(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Zoom({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       const window = getWindow();
       extendParams({
         zoom: {
@@ -7629,13 +7348,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function Lazy(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Lazy({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       extendParams({
         lazy: {
           checkInView: false,
@@ -7654,11 +7372,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       let scrollHandlerAttached = false;
       let initialImageLoaded = false;
 
-      function loadInSlide(index, loadInDuplicate) {
-        if (loadInDuplicate === void 0) {
-          loadInDuplicate = true;
-        }
-
+      function loadInSlide(index, loadInDuplicate = true) {
         const params = swiper.params.lazy;
         if (typeof index === 'undefined') return;
         if (swiper.slides.length === 0) return;
@@ -7917,12 +7631,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /* eslint no-bitwise: ["error", { "allow": [">>"] }] */
-    function Controller(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function Controller({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         controller: {
           control: undefined,
@@ -8108,12 +7821,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function A11y(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function A11y({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         a11y: {
           enabled: true,
@@ -8127,8 +7839,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           containerMessage: null,
           containerRoleDescriptionMessage: null,
           itemRoleDescriptionMessage: null,
-          slideRole: 'group',
-          id: null
+          slideRole: 'group'
         }
       });
       let liveRegion = null;
@@ -8140,11 +7851,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         notification.html(message);
       }
 
-      function getRandomNumber(size) {
-        if (size === void 0) {
-          size = 16;
-        }
-
+      function getRandomNumber(size = 16) {
         const randomChar = () => Math.round(16 * Math.random()).toString(16);
 
         return 'x'.repeat(size).replace(/x/g, randomChar);
@@ -8295,15 +8002,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         addElControls($el, wrapperId);
       };
 
-      const handleFocus = e => {
-        const slideEl = e.target.closest(`.${swiper.params.slideClass}`);
-        if (!slideEl || !swiper.slides.includes(slideEl)) return;
-        const isActive = swiper.slides.indexOf(slideEl) === swiper.activeIndex;
-        const isVisible = swiper.params.watchSlidesProgress && swiper.visibleSlides && swiper.visibleSlides.includes(slideEl);
-        if (isActive || isVisible) return;
-        swiper.slideTo(swiper.slides.indexOf(slideEl), 0);
-      };
-
       function init() {
         const params = swiper.params.a11y;
         swiper.$el.append(liveRegion); // Container
@@ -8320,7 +8018,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
 
         const $wrapperEl = swiper.$wrapperEl;
-        const wrapperId = params.id || $wrapperEl.attr('id') || `swiper-wrapper-${getRandomNumber(16)}`;
+        const wrapperId = $wrapperEl.attr('id') || `swiper-wrapper-${getRandomNumber(16)}`;
         const live = swiper.params.autoplay && swiper.params.autoplay.enabled ? 'off' : 'polite';
         addElId($wrapperEl, wrapperId);
         addElLive($wrapperEl, live); // Slide
@@ -8360,10 +8058,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
         if (hasClickablePagination()) {
           swiper.pagination.$el.on('keydown', classesToSelector(swiper.params.pagination.bulletClass), onEnterOrSpaceKey);
-        } // Tab focus
-
-
-        swiper.$el.on('focus', handleFocus, true);
+        }
       }
 
       function destroy() {
@@ -8390,10 +8085,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
         if (hasClickablePagination()) {
           swiper.pagination.$el.off('keydown', classesToSelector(swiper.params.pagination.bulletClass), onEnterOrSpaceKey);
-        } // Tab focus
-
-
-        swiper.$el.off('focus', handleFocus, true);
+        }
       }
 
       on('beforeInit', () => {
@@ -8402,8 +8094,13 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       on('afterInit', () => {
         if (!swiper.params.a11y.enabled) return;
         init();
+        updateNavigation();
       });
-      on('fromEdge toEdge afterInit lock unlock', () => {
+      on('toEdge', () => {
+        if (!swiper.params.a11y.enabled) return;
+        updateNavigation();
+      });
+      on('fromEdge', () => {
         if (!swiper.params.a11y.enabled) return;
         updateNavigation();
       });
@@ -8417,12 +8114,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function History(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function History({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         history: {
           enabled: false,
@@ -8568,13 +8264,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function HashNavigation(_ref) {
-      let {
-        swiper,
-        extendParams,
-        emit,
-        on
-      } = _ref;
+    function HashNavigation({
+      swiper,
+      extendParams,
+      emit,
+      on
+    }) {
       let initialized = false;
       const document = getDocument();
       const window = getWindow();
@@ -8665,13 +8360,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
     }
 
     /* eslint no-underscore-dangle: "off" */
-    function Autoplay(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on,
-        emit
-      } = _ref;
+    function Autoplay({
+      swiper,
+      extendParams,
+      on,
+      emit
+    }) {
       let timeout;
       swiper.autoplay = {
         running: false,
@@ -8806,7 +8500,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         if (swiper.params.autoplay.disableOnInteraction) {
           stop();
         } else {
-          emit('autoplayPause');
           pause();
         }
 
@@ -8821,7 +8514,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         }
 
         swiper.autoplay.paused = false;
-        emit('autoplayResume');
         run();
       }
 
@@ -8886,12 +8578,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function Thumb(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function Thumb({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         thumbs: {
           swiper: null,
@@ -8909,7 +8600,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       function onThumbClick() {
         const thumbsSwiper = swiper.thumbs.swiper;
-        if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+        if (!thumbsSwiper) return;
         const clickedIndex = thumbsSwiper.clickedIndex;
         const clickedSlide = thumbsSwiper.clickedSlide;
         if (clickedSlide && $(clickedSlide).hasClass(swiper.params.thumbs.slideThumbActiveClass)) return;
@@ -8975,7 +8666,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       function update(initial) {
         const thumbsSwiper = swiper.thumbs.swiper;
-        if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+        if (!thumbsSwiper) return;
         const slidesPerView = thumbsSwiper.params.slidesPerView === 'auto' ? thumbsSwiper.slidesPerViewDynamic() : thumbsSwiper.params.slidesPerView;
         const autoScrollOffset = swiper.params.thumbs.autoScrollOffset;
         const useOffset = autoScrollOffset && !thumbsSwiper.params.loop;
@@ -9067,18 +8758,19 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         update(true);
       });
       on('slideChange update resize observerUpdate', () => {
+        if (!swiper.thumbs.swiper) return;
         update();
       });
       on('setTransition', (_s, duration) => {
         const thumbsSwiper = swiper.thumbs.swiper;
-        if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+        if (!thumbsSwiper) return;
         thumbsSwiper.setTransition(duration);
       });
       on('beforeDestroy', () => {
         const thumbsSwiper = swiper.thumbs.swiper;
-        if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+        if (!thumbsSwiper) return;
 
-        if (swiperCreated) {
+        if (swiperCreated && thumbsSwiper) {
           thumbsSwiper.destroy();
         }
       });
@@ -9088,13 +8780,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function freeMode(_ref) {
-      let {
-        swiper,
-        extendParams,
-        emit,
-        once
-      } = _ref;
+    function freeMode({
+      swiper,
+      extendParams,
+      emit,
+      once
+    }) {
       extendParams({
         freeMode: {
           enabled: false,
@@ -9107,16 +8798,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           minimumVelocity: 0.02
         }
       });
-
-      function onTouchStart() {
-        const translate = swiper.getTranslate();
-        swiper.setTranslate(translate);
-        swiper.setTransition(0);
-        swiper.touchEventsData.velocities.length = 0;
-        swiper.freeMode.onTouchEnd({
-          currentPos: swiper.rtl ? swiper.translate : -swiper.translate
-        });
-      }
 
       function onTouchMove() {
         const {
@@ -9137,10 +8818,9 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         });
       }
 
-      function onTouchEnd(_ref2) {
-        let {
-          currentPos
-        } = _ref2;
+      function onTouchEnd({
+        currentPos
+      }) {
         const {
           params,
           $wrapperEl,
@@ -9339,18 +9019,16 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
       Object.assign(swiper, {
         freeMode: {
-          onTouchStart,
           onTouchMove,
           onTouchEnd
         }
       });
     }
 
-    function Grid(_ref) {
-      let {
-        swiper,
-        extendParams
-      } = _ref;
+    function Grid({
+      swiper,
+      extendParams
+    }) {
       extendParams({
         grid: {
           rows: 1,
@@ -9651,10 +9329,9 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       swiper.removeSlide(slidesIndexes);
     }
 
-    function Manipulation(_ref) {
-      let {
-        swiper
-      } = _ref;
+    function Manipulation({
+      swiper
+    }) {
       Object.assign(swiper, {
         appendSlide: appendSlide.bind(swiper),
         prependSlide: prependSlide.bind(swiper),
@@ -9672,9 +9349,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         setTranslate,
         setTransition,
         overwriteParams,
-        perspective,
-        recreateShadows,
-        getEffectParams
+        perspective
       } = params;
       on('beforeInit', () => {
         if (swiper.params.effect !== effect) return;
@@ -9696,35 +9371,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         if (swiper.params.effect !== effect) return;
         setTransition(duration);
       });
-      on('transitionEnd', () => {
-        if (swiper.params.effect !== effect) return;
-
-        if (recreateShadows) {
-          if (!getEffectParams || !getEffectParams().slideShadows) return; // remove shadows
-
-          swiper.slides.each(slideEl => {
-            const $slideEl = swiper.$(slideEl);
-            $slideEl.find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left').remove();
-          }); // create new one
-
-          recreateShadows();
-        }
-      });
-      let requireUpdateOnVirtual;
-      on('virtualUpdate', () => {
-        if (swiper.params.effect !== effect) return;
-
-        if (!swiper.slides.length) {
-          requireUpdateOnVirtual = true;
-        }
-
-        requestAnimationFrame(() => {
-          if (requireUpdateOnVirtual && swiper.slides && swiper.slides.length) {
-            setTranslate();
-            requireUpdateOnVirtual = false;
-          }
-        });
-      });
     }
 
     function effectTarget(effectParams, $slideEl) {
@@ -9738,13 +9384,12 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return $slideEl;
     }
 
-    function effectVirtualTransitionEnd(_ref) {
-      let {
-        swiper,
-        duration,
-        transformEl,
-        allSlides
-      } = _ref;
+    function effectVirtualTransitionEnd({
+      swiper,
+      duration,
+      transformEl,
+      allSlides
+    }) {
       const {
         slides,
         activeIndex,
@@ -9775,12 +9420,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       }
     }
 
-    function EffectFade(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function EffectFade({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         fadeEffect: {
           crossFade: false,
@@ -9844,12 +9488,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function EffectCube(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function EffectCube({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         cubeEffect: {
           slideShadows: true,
@@ -9858,33 +9501,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           shadowScale: 0.94
         }
       });
-
-      const createSlideShadows = ($slideEl, progress, isHorizontal) => {
-        let shadowBefore = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
-        let shadowAfter = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
-
-        if (shadowBefore.length === 0) {
-          shadowBefore = $(`<div class="swiper-slide-shadow-${isHorizontal ? 'left' : 'top'}"></div>`);
-          $slideEl.append(shadowBefore);
-        }
-
-        if (shadowAfter.length === 0) {
-          shadowAfter = $(`<div class="swiper-slide-shadow-${isHorizontal ? 'right' : 'bottom'}"></div>`);
-          $slideEl.append(shadowAfter);
-        }
-
-        if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
-        if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
-      };
-
-      const recreateShadows = () => {
-        // create new ones
-        const isHorizontal = swiper.isHorizontal();
-        swiper.slides.each(slideEl => {
-          const progress = Math.max(Math.min(slideEl.progress, 1), -1);
-          createSlideShadows($(slideEl), progress, isHorizontal);
-        });
-      };
 
       const setTranslate = () => {
         const {
@@ -9979,7 +9595,22 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           $slideEl.transform(transform);
 
           if (params.slideShadows) {
-            createSlideShadows($slideEl, progress, isHorizontal);
+            // Set shadows
+            let shadowBefore = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
+            let shadowAfter = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
+
+            if (shadowBefore.length === 0) {
+              shadowBefore = $(`<div class="swiper-slide-shadow-${isHorizontal ? 'left' : 'top'}"></div>`);
+              $slideEl.append(shadowBefore);
+            }
+
+            if (shadowAfter.length === 0) {
+              shadowAfter = $(`<div class="swiper-slide-shadow-${isHorizontal ? 'right' : 'bottom'}"></div>`);
+              $slideEl.append(shadowAfter);
+            }
+
+            if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
+            if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
           }
         }
 
@@ -10003,7 +9634,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
         const zFactor = browser.isSafari || browser.isWebView ? -swiperSize / 2 : 0;
         $wrapperEl.transform(`translate3d(0px,0,${zFactor}px) rotateX(${swiper.isHorizontal() ? 0 : wrapperRotate}deg) rotateY(${swiper.isHorizontal() ? -wrapperRotate : 0}deg)`);
-        $wrapperEl[0].style.setProperty('--swiper-cube-translate-z', `${zFactor}px`);
       };
 
       const setTransition = duration => {
@@ -10024,8 +9654,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         on,
         setTranslate,
         setTransition,
-        recreateShadows,
-        getEffectParams: () => swiper.params.cubeEffect,
         perspective: () => true,
         overwriteParams: () => ({
           slidesPerView: 1,
@@ -10052,12 +9680,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       return $shadowEl;
     }
 
-    function EffectFlip(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function EffectFlip({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         flipEffect: {
           slideShadows: true,
@@ -10065,37 +9692,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           transformEl: null
         }
       });
-
-      const createSlideShadows = ($slideEl, progress, params) => {
-        let shadowBefore = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
-        let shadowAfter = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
-
-        if (shadowBefore.length === 0) {
-          shadowBefore = createShadow(params, $slideEl, swiper.isHorizontal() ? 'left' : 'top');
-        }
-
-        if (shadowAfter.length === 0) {
-          shadowAfter = createShadow(params, $slideEl, swiper.isHorizontal() ? 'right' : 'bottom');
-        }
-
-        if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
-        if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
-      };
-
-      const recreateShadows = () => {
-        // Set shadows
-        const params = swiper.params.flipEffect;
-        swiper.slides.each(slideEl => {
-          const $slideEl = $(slideEl);
-          let progress = $slideEl[0].progress;
-
-          if (swiper.params.flipEffect.limitRotation) {
-            progress = Math.max(Math.min(slideEl.progress, 1), -1);
-          }
-
-          createSlideShadows($slideEl, progress, params);
-        });
-      };
 
       const setTranslate = () => {
         const {
@@ -10131,7 +9727,20 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           $slideEl[0].style.zIndex = -Math.abs(Math.round(progress)) + slides.length;
 
           if (params.slideShadows) {
-            createSlideShadows($slideEl, progress, params);
+            // Set shadows
+            let shadowBefore = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
+            let shadowAfter = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
+
+            if (shadowBefore.length === 0) {
+              shadowBefore = createShadow(params, $slideEl, swiper.isHorizontal() ? 'left' : 'top');
+            }
+
+            if (shadowAfter.length === 0) {
+              shadowAfter = createShadow(params, $slideEl, swiper.isHorizontal() ? 'right' : 'bottom');
+            }
+
+            if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
+            if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
           }
 
           const transform = `translate3d(${tx}px, ${ty}px, 0px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -10159,8 +9768,6 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
         on,
         setTranslate,
         setTransition,
-        recreateShadows,
-        getEffectParams: () => swiper.params.flipEffect,
         perspective: () => true,
         overwriteParams: () => ({
           slidesPerView: 1,
@@ -10172,12 +9779,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function EffectCoverflow(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function EffectCoverflow({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         coverflowEffect: {
           rotate: 50,
@@ -10208,8 +9814,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           const $slideEl = slides.eq(i);
           const slideSize = slidesSizesGrid[i];
           const slideOffset = $slideEl[0].swiperSlideOffset;
-          const centerOffset = (center - slideOffset - slideSize / 2) / slideSize;
-          const offsetMultiplier = typeof params.modifier === 'function' ? params.modifier(centerOffset) : centerOffset * params.modifier;
+          const offsetMultiplier = (center - slideOffset - slideSize / 2) / slideSize * params.modifier;
           let rotateY = isHorizontal ? rotate * offsetMultiplier : 0;
           let rotateX = isHorizontal ? 0 : rotate * offsetMultiplier; // var rotateZ = 0
 
@@ -10275,12 +9880,11 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function EffectCreative(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function EffectCreative({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         creativeEffect: {
           transformEl: null,
@@ -10427,17 +10031,15 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
       });
     }
 
-    function EffectCards(_ref) {
-      let {
-        swiper,
-        extendParams,
-        on
-      } = _ref;
+    function EffectCards({
+      swiper,
+      extendParams,
+      on
+    }) {
       extendParams({
         cardsEffect: {
           slideShadows: true,
-          transformEl: null,
-          rotate: true
+          transformEl: null
         }
       });
 
@@ -10473,9 +10075,8 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           let scale = 1;
           let rotate = -2 * progress;
           let tXAdd = 8 - Math.abs(progress) * 0.75;
-          const slideIndex = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.from + i : i;
-          const isSwipeToNext = (slideIndex === activeIndex || slideIndex === activeIndex - 1) && progress > 0 && progress < 1 && (isTouched || swiper.params.cssMode) && currentTranslate < startTranslate;
-          const isSwipeToPrev = (slideIndex === activeIndex || slideIndex === activeIndex + 1) && progress < 0 && progress > -1 && (isTouched || swiper.params.cssMode) && currentTranslate > startTranslate;
+          const isSwipeToNext = (i === activeIndex || i === activeIndex - 1) && progress > 0 && progress < 1 && (isTouched || swiper.params.cssMode) && currentTranslate < startTranslate;
+          const isSwipeToPrev = (i === activeIndex || i === activeIndex + 1) && progress < 0 && progress > -1 && (isTouched || swiper.params.cssMode) && currentTranslate > startTranslate;
 
           if (isSwipeToNext || isSwipeToPrev) {
             const subProgress = (1 - Math.abs((Math.abs(progress) - 0.5) / 0.5)) ** 0.5;
@@ -10504,7 +10105,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
           const scaleString = progress < 0 ? `${1 + (1 - scale) * progress}` : `${1 - (1 - scale) * progress}`;
           const transform = `
         translate3d(${tX}, ${tY}, ${tZ}px)
-        rotateZ(${params.rotate ? rotate : 0}deg)
+        rotateZ(${rotate}deg)
         scale(${scaleString})
       `;
 
@@ -10558,7 +10159,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 
     return Swiper;
 
-}));
+})));
 
 
 },{}]},{},[1]);

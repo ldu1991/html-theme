@@ -1,13 +1,11 @@
 'use strict';
 
-const browserSync   = require('browser-sync').create(),
-    data            = require('gulp-data'),
-    gulp            = require('gulp'),
-    plugins         = require('gulp-load-plugins')(),
-    pug             = require('gulp-pug'),
-    sass            = require('gulp-sass')(require('sass')),
-    fs = require('fs');
+const browserSync = require('browser-sync').create(),
+    gulp = require('gulp'),
+    plugins = require('gulp-load-plugins')(),
+    sass = require('gulp-sass')(require('sass'));
 
+plugins.fs = require('fs');
 plugins.merge = require('merge-stream')
 plugins.browserify = require('browserify')
 plugins.babelify = require('babelify')
@@ -24,14 +22,15 @@ let src = {
         main: '../',
         scss: './scss',
         js: './js',
-        pug: './pug'
+        html: './html',
+        pug: './pug',
     },
     dist = {
         main: '../',
-        pug: './pug/',
         css: '../assets/css',
         js: '../assets/js'
-    }
+    },
+    markupHtml = false
 /* End Paths and variables */
 
 /* Service tasks */
@@ -46,8 +45,11 @@ gulp.task('scss', require('./gulpfile_css')(gulp, plugins, false, sass));
 gulp.task('scss:release', require('./gulpfile_css')(gulp, plugins, true, sass));
 gulp.task('js', require('./gulpfile_js')(gulp, plugins, false));
 gulp.task('js:release', require('./gulpfile_js')(gulp, plugins, true));
-// gulp.task('html', require('./gulpfile_html')(gulp, plugins))
-gulp.task('pug', require('./gulpfile_pug')(gulp, plugins, pug, data, fs));
+if (markupHtml) {
+    gulp.task('html', require('./gulpfile_html')(gulp, plugins))
+} else {
+    gulp.task('pug', require('./gulpfile_pug')(gulp, plugins));
+}
 
 gulp.task('browser-sync', function () {
     browserSync.init({
@@ -58,7 +60,7 @@ gulp.task('browser-sync', function () {
     })
 
     gulp.watch([
-        dist.main + '**/*.pug',
+        dist.main + '*.html',
         dist.css + '/**/*.css',
         dist.js + '/**/*.js',
     ], {cwd: './'})
@@ -70,10 +72,17 @@ gulp.task('browser-sync', function () {
 gulp.task('watch', function () {
     gulp.watch(src.scss + '/**/*.scss', {cwd: './'}, gulp.series('scss'));
     gulp.watch(src.js + '/**/*.js', {cwd: './'}, gulp.series('js'));
-    // gulp.watch(src.main + '/**/*.html', {cwd: './'}, gulp.series('html'));
-    gulp.watch(src.pug + '/**/*.pug', {cwd: './'}, gulp.series('pug'));
+    if (markupHtml) {
+        gulp.watch(src.html + '/**/*.html', {cwd: './'}, gulp.series('html'));
+    } else {
+        gulp.watch(src.pug + '/**/*.pug', {cwd: './'}, gulp.series('pug'));
+    }
 });
 
-// gulp.task('default', gulp.series('scss', 'js', 'html', gulp.parallel('browser-sync', 'watch')));
-gulp.task('default', gulp.series('scss', 'js', 'pug', gulp.parallel('browser-sync', 'watch')));
-gulp.task('release', gulp.series('clean-css-maps', 'scss:release', 'js:release', 'pug'));
+if (markupHtml) {
+    gulp.task('default', gulp.series('scss', 'js', 'html', gulp.parallel('browser-sync', 'watch')));
+    gulp.task('release', gulp.series('clean-css-maps', 'scss:release', 'js:release', 'html'));
+} else {
+    gulp.task('default', gulp.series('scss', 'js', 'pug', gulp.parallel('browser-sync', 'watch')));
+    gulp.task('release', gulp.series('clean-css-maps', 'scss:release', 'js:release', 'pug'));
+}

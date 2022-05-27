@@ -5,13 +5,6 @@ module.exports = function (gulp, plugins) {
     }
 
     /* Paths */
-    let src = {
-            html: './html/*.html'
-        },
-        dist = {
-            html: '../'
-        };
-
     let optionsHtml = {
         indent_with_tabs: true,
         max_preserve_newlines: 0,
@@ -21,12 +14,12 @@ module.exports = function (gulp, plugins) {
     /* End Paths */
 
   return function () {
-    return gulp.src(src.html)
+    return gulp.src('./html/*.html')
         .pipe(plugins.plumber({errorHandler: onError}))
         .pipe(plugins.fileInclude())
         .pipe(plugins.htmlmin({removeComments: true}))
         .pipe(plugins.htmlBeautify(optionsHtml))
         .pipe(plugins.changedInPlace({firstPass: true}))
-        .pipe(gulp.dest(dist.html))
+        .pipe(gulp.dest('../'))
   }
 }
