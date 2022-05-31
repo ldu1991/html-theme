@@ -1,7 +1,99 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isjQuery = exports.isEven = exports.Coordinates = void 0;
+
+/**
+ * is jQuery
+ * @param obj
+ * @returns {*}
+ */
+var isjQuery = function isjQuery(obj) {
+  return obj instanceof jQuery ? obj[0] : obj;
+};
+/**
+ * is Even
+ * @param num
+ * @returns {boolean}
+ */
+
+
+exports.isjQuery = isjQuery;
+
+var isEven = function isEven(num) {
+  return num % 2 === 0;
+};
+/**
+ * Coordinates element
+ * @param element
+ * @returns {{}}
+ * @constructor
+ */
+
+
+exports.isEven = isEven;
+
+var Coordinates = function Coordinates(element) {
+  if (typeof element === 'undefined' || element === null) {
+    return;
+  }
+
+  function isVisible(element) {
+    var style = window.getComputedStyle(element);
+    return style.display !== 'none';
+  }
+
+  function getCoordinates(element, visible) {
+    var rect = {},
+        box,
+        v;
+    box = element.getBoundingClientRect();
+    v = visible || false;
+
+    if (v) {
+      if (element.hasAttribute('data-style-attribute-coordinates')) {
+        element.style.cssText = element.dataset.styleAttributeCoordinates;
+        element.removeAttribute('data-style-attribute-coordinates');
+      } else {
+        element.removeAttribute('style');
+      }
+    }
+
+    rect.element = element;
+    rect.top = box.top;
+    rect.right = document.documentElement.clientWidth - box.right;
+    rect.bottom = document.documentElement.clientHeight - box.bottom;
+    rect.left = box.left;
+    rect.width = box.width;
+    rect.height = box.height;
+    return rect;
+  }
+
+  if (!isVisible(element)) {
+    if (element.hasAttribute('style')) {
+      element.dataset.styleAttributeCoordinates = element.getAttribute('style');
+      element.style.cssText = 'display: block; opacity: 0;' + element.getAttribute('style');
+      return getCoordinates(element, true);
+    } else {
+      element.style.cssText = 'display: block; opacity: 0;';
+      return getCoordinates(element, true);
+    }
+  } else {
+    return getCoordinates(element);
+  }
+};
+
+exports.Coordinates = Coordinates;
+
+},{}],2:[function(require,module,exports){
+"use strict";
+
 var _swiperBundle = _interopRequireDefault(require("swiper/swiper-bundle"));
+
+var _functions = require("./app/functions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16,19 +108,6 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-/**
- * Gutenberg
- * is jQuery
- * @param obj
- * @returns {*}
- */
-function isjQuery(obj) {
-  return obj instanceof jQuery ? obj[0] : obj;
-}
-
-var vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
 
 (function ($) {
   /**
@@ -56,7 +135,7 @@ document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
 
 
 var initializeBlockHeroModule = function initializeBlockHeroModule(block) {
-  block = isjQuery(block);
+  block = (0, _functions.isjQuery)(block);
 };
 
 if (window.acf) {
@@ -78,7 +157,7 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
   }
 }); // ---------- End Deleting placeholder focus ---------- //
 
-},{"swiper/swiper-bundle":2}],2:[function(require,module,exports){
+},{"./app/functions":1,"swiper/swiper-bundle":3}],3:[function(require,module,exports){
 /**
  * Swiper 7.4.1
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -10162,4 +10241,4 @@ _toConsumableArray(document.querySelectorAll('input, textarea')).forEach(functio
 })));
 
 
-},{}]},{},[1]);
+},{}]},{},[2]);

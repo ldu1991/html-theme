@@ -1,18 +1,6 @@
 import Swiper from 'swiper/swiper-bundle';
-
-
-/**
- * Gutenberg
- * is jQuery
- * @param obj
- * @returns {*}
- */
-function isjQuery(obj) {
-    return (obj instanceof jQuery) ? obj[0] : obj
-}
-
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+import './app/functions'
+import {isEven, isjQuery, Coordinates} from "./app/functions";
 
 (function ($) {
 

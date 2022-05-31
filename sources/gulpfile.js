@@ -1,16 +1,16 @@
 'use strict';
 
-const browserSync = require('browser-sync').create(),
-    gulp = require('gulp'),
-    plugins = require('gulp-load-plugins')(),
-    sass = require('gulp-sass')(require('sass'));
+const browserSync   = require('browser-sync').create(),
+    gulp            = require('gulp'),
+    plugins         = require('gulp-load-plugins')(),
+    sass            = require('gulp-sass')(require('sass'));
 
-plugins.fs = require('fs');
-plugins.merge = require('merge-stream')
-plugins.browserify = require('browserify')
-plugins.babelify = require('babelify')
-plugins.buffer = require('vinyl-buffer')
-plugins.source = require("vinyl-source-stream")
+plugins.fs          = require('fs');
+plugins.merge       = require('merge-stream')
+plugins.browserify  = require('browserify')
+plugins.babelify    = require('babelify')
+plugins.buffer      = require('vinyl-buffer')
+plugins.source      = require("vinyl-source-stream")
 
 gulp.task('pl', function () {
     console.log(plugins);
