@@ -1,47 +1,17 @@
+import './app/gutenberg';
 import Swiper from 'swiper/swiper-bundle';
-import './app/functions'
+import {gsap} from "gsap/dist/gsap";
+import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
 import {isEven, isjQuery, Coordinates} from "./app/functions";
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 (function ($) {
 
 
-    /**
-     * jQuery
-     * Gutenberg block
-     * Hero Module
-     * @param $block
-     */
-    let initializeBlockHeroModule = ($block) => {
 
-    }
-
-    if (window.acf) {
-        window.acf.addAction('render_block_preview/type=hero-module', initializeBlockHeroModule)
-    } else {
-        $('.hero-module').each(function () {
-            initializeBlockHeroModule($(this))
-        })
-    }
-
-})(jQuery)
-
-
-/**
- * JavaScript ES6
- * Gutenberg block
- * Hero Module
- * @param block
- */
-let initializeBlockHeroModule = (block) => {
-    block = isjQuery(block)
-
-}
-
-if (window.acf) {
-    window.acf.addAction('render_block_preview/type=hero-module', initializeBlockHeroModule)
-} else {
-    [...document.querySelectorAll('.hero-module')].forEach(initializeBlockHeroModule)
-}
+})(jQuery);
 
 
 // ------------ Deleting placeholder focus ------------ //
