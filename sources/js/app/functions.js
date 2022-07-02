@@ -42,13 +42,13 @@ export const Coordinates = element => {
             }
         }
 
-        rect.element    = element;
-        rect.top        = box.top;
-        rect.right      = document.documentElement.clientWidth - box.right;
-        rect.bottom     = document.documentElement.clientHeight - box.bottom;
-        rect.left       = box.left;
-        rect.width      = box.width;
-        rect.height     = box.height;
+        rect.element = element;
+        rect.top = box.top;
+        rect.right = document.documentElement.clientWidth - box.right;
+        rect.bottom = document.documentElement.clientHeight - box.bottom;
+        rect.left = box.left;
+        rect.width = box.width;
+        rect.height = box.height;
 
         return rect;
     }
@@ -66,5 +66,97 @@ export const Coordinates = element => {
 
     } else {
         return getCoordinates(element);
+    }
+}
+
+/**
+ * Video Adaptive Resize
+ * @param elements
+ */
+export const videoResize = elements => {
+    document.querySelectorAll(elements).forEach(el => {
+        el.setAttribute('style', 'position: absolute;top: 0;left: 0;width: 100%;height: 100%;overflow: hidden;')
+
+        let fnResize = () => {
+            let video = el.querySelector('video')
+
+            // Get a native video size
+            let videoHeight = video.videoHeight;
+            let videoWidth = video.videoWidth;
+
+            // Get a wrapper size
+            let wrapperHeight = el.offsetHeight;
+            let wrapperWidth = el.offsetWidth;
+
+            if (wrapperWidth / videoWidth > wrapperHeight / videoHeight) {
+                video.setAttribute('style', 'width:' + (wrapperWidth + 3) + 'px;height:auto;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);')
+            } else {
+                video.setAttribute('style', 'width:auto;height:' + (wrapperHeight + 3) + 'px;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);')
+            }
+        }
+
+        fnResize();
+        window.addEventListener('resize', fnResize);
+    })
+}
+
+/**
+ * Breakpoints
+ * @param mediaQuery
+ * @param callback
+ * @param options
+ * @returns {boolean}
+ * @constructor
+ */
+export const Breakpoints = (mediaQuery, callback, options) => {
+    let defaults = {
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200,
+        xxl: 1400
+    }
+
+    let defaultsOptions = Object.assign({}, defaults, options);
+
+    let option = {}
+    for (let property in defaultsOptions) {
+        option[property + ':min'] = defaultsOptions[property]
+        option[property + ':max'] = defaultsOptions[property] - 1
+    }
+
+
+    let mediaQueryArr = mediaQuery.split(',')
+    let mediaQueryString = ''
+
+    if(mediaQueryArr.length) {
+        let i = 1;
+        mediaQueryArr.forEach(el => {
+            if(el.trim().indexOf(':min') !== -1) {
+                mediaQueryString += '(min-width: ' + option[el.trim()] + 'px)'
+
+                if(i < mediaQueryArr.length) mediaQueryString += ' and '
+            } else if(el.trim().indexOf(':max') !== -1) {
+                mediaQueryString += '(max-width: ' + option[el.trim()] + 'px)'
+
+                if(i < mediaQueryArr.length) mediaQueryString += ' and '
+            }
+
+            i++;
+        })
+
+        if (callback !== undefined) {
+            let handleMatchMedia = mq => {
+                callback(mq)
+            }
+
+            let mq = window.matchMedia(mediaQueryString)
+
+            handleMatchMedia(mq);
+
+            mq.addEventListener('change', handleMatchMedia);
+        } else {
+            return window.matchMedia(mediaQueryString).matches
+        }
     }
 }
