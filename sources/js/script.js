@@ -9,8 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 (function ($) {
 
-
-
 })(jQuery);
 
 
