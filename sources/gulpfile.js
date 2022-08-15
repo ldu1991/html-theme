@@ -30,7 +30,7 @@ let src = {
         css: '../assets/css',
         js: '../assets/js'
     },
-    markupHtml = false
+    markupHtml = true
 /* End Paths and variables */
 
 /* Service tasks */
