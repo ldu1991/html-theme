@@ -45,14 +45,20 @@
     "vinyl-source-stream": "latest"
   },
   "dependencies": {
+    "@barba/core": "latest",
+    "@barba/css": "latest",
+    "@barba/prefetch": "latest",
+    "@barba/router": "latest",
     "@fancyapps/fancybox": "latest",
     "animate.css": "latest",
     "bootstrap": "^4.6.1",
-    "jquery-breakpoints": "latest",
+    "bootstrap-v4-rtl": "latest",
+    "enquire.js": "latest",
     "lazysizes": "latest",
     "remodal": "latest",
     "selectboxit": "latest",
-    "swiper": "latest",
-    "gsap": "latest"
+    "sharer.js": "latest",
+    "sp-form-data": "latest",
+    "swiper": "latest"
   }
 }
