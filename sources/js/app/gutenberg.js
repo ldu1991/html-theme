@@ -27,6 +27,10 @@ const initializeBlock = block => {
     let elementDirectly = block.parentNode.querySelector('.CLASS-BLOCK')
 
 }
+
+
+
+
 if (window.acf) {
     window.acf.addAction('render_block_preview/type=TYPE-BLOCK', initializeBlock)
 } else {
